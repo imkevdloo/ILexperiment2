@@ -118,7 +118,7 @@ def set_trees_group_total(player):
 def set_forest(player):
     participant = player.participant
     participant.forest = participant.forest - participant.trees_group_round + Constants.regrowth_rate
-    if participant.forest < 0:
+    if participant.forest < 41:
         participant.forest = 0
     return participant.forest
 
@@ -189,6 +189,8 @@ def set_trees_player_total(player):
 def set_points_player_round(player):
     participant = player.participant
     participant.points_player_round = participant.trees_player_round
+    if participant.forest == 0: 
+        participant.points_player_round = 0
     return participant.points_player_round
 
 
@@ -212,7 +214,7 @@ def set_points_group_total(player):
 
 def set_profit(player):
     participant = player.participant
-    participant.profit_player_total = participant.points_player_total * 0.1
+    participant.profit_player_total = round(participant.points_player_total * 0.1,1)
     return participant.profit_player_total
 
 def set_eco_labels_total(player): #number of eco-labels in the group, DOESNT WORK YET

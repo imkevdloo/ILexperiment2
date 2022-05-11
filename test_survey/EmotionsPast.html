@@ -4,10 +4,32 @@
 {{ block content }}
 
     <p>
-        The following list consists of words that describe different feelings and emotions. Read each item and indicate to what extent you have felt this way <strong> during the past few weeks </strong>.
-    </p>
-    <br><br>
-    {{ formfields }}
-    {{ next_button }}
+        The following list consists of words that describe different feelings and emotions. Read each item and indicate to what extent you have felt this way <strong> during the past few weeks</strong>.
+        <table class="table">
 
-{{ endblock }}
+            <tr>
+                <td> . </td>
+                <td>Very slightly <br> or not at all </td>
+                <td> A little  </td>
+                <td> Moderately </td>
+                <td>Quite a bit </td>
+                <td>Extremely </td>
+            </tr>
+            <tr>
+                
+            {{ for field in form }}
+                <tr></tr>
+                    <td>{{ field.label }}</td>
+                    
+                    {{ for choice in field }}
+                    <td>{{ choice }}</td>
+                    {{ endfor }}
+                </tr>
+            {{ endfor }}
+          
+        </table>
+        </p>
+        <br><br>
+        {{ next_button }}
+    
+    {{ endblock }}
