@@ -54,9 +54,7 @@ class Player(BasePlayer):
     game_over               = models.IntegerField(min=0, max=1)
     sButtonClick            = models.StringField(blank=True)
     sTimeClick              = models.StringField(blank=True) 
-    sButtonsPressed         = models.LongStringField()
-    sTimesPressed           = models.LongStringField()
-
+    prev_player              = models.FloatField()
 
 #def creating_session(subsession):  #delete?
  #   if subsession.round_number == 1:
@@ -74,14 +72,18 @@ def set_trees_group_round(player):
         participant.trees_p2 = 10 
         participant.trees_p3 = 10
         participant.trees_p4 = 20
+        participant.prev_player = 0 
+
     else:     
         participant.trees_p2 = random.choice(Constants.sustainable_decisions) # Always sustainable player (0, 1, 2)
         participant.trees_p4 = random.choice(Constants.not_sustainable_decisions) # Always selfish player(3, 4)
+        participant.prev_player = player.in_round(player.round_number - 1).trees_player_round
+
         if player.participant.forest < 41:
             participant.trees_p3 = random.choice(Constants.ten)
-        elif participant.trees_player_round == 20:
+        elif participant.prev_player == 20:
             participant.trees_p3 = random.choice(Constants.twenty) # Not sustainable if rest of group trees > 10
-        elif participant.trees_player_round > 10:
+        elif participant.prev_player > 10:
             participant.trees_p3 = random.choice(Constants.fiftheen)
         else:
             participant.trees_p3 = random.choice(Constants.sustainable_decisions) # Sustainable if rest of group trees < 10
@@ -108,6 +110,15 @@ def set_trees_group_round(player):
     #participant.trees_group_round = participant.trees_p2 + participant.trees_p3 + participant.trees_p4 + participant.trees_player_round
     #return participant.trees_group_round
 
+
+#def prev_player(player):
+ #   participant = player.participant
+  #  if player.round_number == 1 :
+   #     participant.prev_player = 0 
+    #else:  
+     #   participant.prev_player = player.trees_player_round.in_round(player.round_number - 1)
+    #return participant_prev_player
+    #print (particpant.prev_player)
 
 def set_trees_group_total(player):
     participant = player.participant
@@ -267,6 +278,8 @@ class DecisionControlGP(Page):
         player.forest = set_forest(player)
         player.trees_group_total = set_trees_group_total(player)
         player.eco_status = set_eco_status(player)
+        player.trees_p2 = participant.trees_p2
+        player.prev_player = participant.prev_player
         player.eco_status_p2 = set_eco_status_p2(player)
         player.eco_status_p3 = set_eco_status_p3(player)
         player.eco_status_p4 = set_eco_status_p4 (player)
@@ -280,6 +293,9 @@ class DecisionControlGP(Page):
         player.participant.game_over = 0
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
+        player.trees_p3 = participant.trees_p3
+        player.trees_p4 = participant.trees_p4
+        player.game_over = participant.game_over
 
 #DecisionControlGT
 class DecisionControlGT(Page):
@@ -320,7 +336,11 @@ class DecisionControlGT(Page):
         player.participant.game_over = 0
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-        
+        player.trees_p2 = participant.trees_p2
+        player.prev_player = participant.prev_player
+        player.trees_p3 = participant.trees_p3
+        player.trees_p4 = participant.trees_p4
+        player.game_over = participant.game_over
 
 #DecisionControlIP
 class DecisionControlIP(Page):
@@ -362,7 +382,11 @@ class DecisionControlIP(Page):
         player.participant.game_over = 0
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-        
+        player.trees_p2 = participant.trees_p2
+        player.prev_player = participant.prev_player
+        player.trees_p3 = participant.trees_p3
+        player.trees_p4 = participant.trees_p4
+        player.game_over = participant.game_over
 
 #DecisionControlIT
 class DecisionControlIT(Page):
@@ -403,7 +427,11 @@ class DecisionControlIT(Page):
         player.participant.game_over = 0
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-        
+        player.trees_p2 = participant.trees_p2
+        player.prev_player = participant.prev_player
+        player.trees_p3 = participant.trees_p3
+        player.trees_p4 = participant.trees_p4
+        player.game_over = participant.game_over
 
 #DecisionEcoGP
 
@@ -446,7 +474,11 @@ class DecisionEcoGP(Page):
         player.eco_labels_total = set_eco_labels_total(player)
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-       
+        player.trees_p2 = participant.trees_p2
+        player.prev_player = participant.prev_player
+        player.trees_p3 = participant.trees_p3
+        player.trees_p4 = participant.trees_p4
+        player.game_over = participant.game_over
 
 #DecisionECOGT
 class DecisionEcoGT(Page):
@@ -487,7 +519,12 @@ class DecisionEcoGT(Page):
         player.eco_labels_total = set_eco_labels_total(player)
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-        
+        player.trees_p2 = participant.trees_p2
+        player.prev_player = participant.prev_player
+        player.trees_p3 = participant.trees_p3
+        player.trees_p4 = participant.trees_p4
+        player.game_over = participant.game_over
+
 #DecisionEcoIP
 class DecisionEcoIP(Page):
     form_model = 'player'
@@ -527,7 +564,11 @@ class DecisionEcoIP(Page):
         player.eco_labels_total = set_eco_labels_total(player)
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-        
+        player.trees_p2 = participant.trees_p2
+        player.prev_player = participant.prev_player
+        player.trees_p3 = participant.trees_p3
+        player.trees_p4 = participant.trees_p4
+        player.game_over = participant.game_over
 
 #DecisionEcoIT
 class DecisionEcoIT(Page):
@@ -568,7 +609,11 @@ class DecisionEcoIT(Page):
         player.eco_labels_total = set_eco_labels_total(player)
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-        
+        player.trees_p2 = participant.trees_p2
+        player.prev_player = participant.prev_player
+        player.trees_p3 = participant.trees_p3
+        player.trees_p4 = participant.trees_p4
+        player.game_over = participant.game_over
         
 class RoundFeedback(Page):
     form_model = 'player'

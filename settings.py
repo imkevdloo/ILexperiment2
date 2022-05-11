@@ -27,7 +27,7 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = ['treatment', 'bot_question', 'trees_player_round', 'eco_status', 'trees_player_total', 'trees_p2', 'trees_p3', 'trees_p4', 'trees_group_round', 'trees_group_total',
-                        'forest', 'points_player_round', 'points_player_total', 'points_group_round', 'points_group_total', 'eco_status_p2', 'eco_status_p3', 'eco_status_p4', 'eco_labels_total', 'game_over', 'sButtonClick', 'sTimeClick', 'profit_player_total']
+                        'forest', 'points_player_round', 'points_player_total', 'points_group_round', 'points_group_total', 'eco_status_p2', 'eco_status_p3', 'eco_status_p4', 'eco_labels_total', 'game_over', 'sButtonClick', 'sTimeClick', 'profit_player_total', 'prev_player']
 SESSION_FIELDS = []
 
 # ISO-639 code
