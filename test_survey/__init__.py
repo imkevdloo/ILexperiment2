@@ -34,6 +34,66 @@ class Player(BasePlayer):
         ],
         label="Please select your gender:",
         )
+    talking = models.IntegerField(
+       choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Talking to someone else about the behaviour of the Player",
+        widget=widgets.RadioSelectHorizontal,
+        )
+    avoiding = models.IntegerField(
+       choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Make a point by avoiding this player in the future",
+        widget=widgets.RadioSelectHorizontal,
+        )
+    donothing = models.IntegerField(
+        choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Do nothing about it",
+        widget=widgets.RadioSelectHorizontal,
+        )
+    angry = models.IntegerField(
+        choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Make an angry remark towards this player (Call them out)",
+        widget=widgets.RadioSelectHorizontal,
+        )
+    violation = models.IntegerField(
+        choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Physically confront the (violating) player",
+        widget=widgets.RadioSelectHorizontal,
+        )
     nationality = models.StringField(label="Please enter your nationality:")
     education = models.IntegerField(
         choices=[
@@ -94,6 +154,8 @@ class Player(BasePlayer):
             ],
         label="My daily-life behaviour is environmently friendly: ",
             )
+        
+
    
     def make_field(label):
         return models.IntegerField(
@@ -126,7 +188,9 @@ class Player(BasePlayer):
     angry_during = make_field('Angry')
     ashamed_during = make_field('Ashamed')    
     anxious_during = make_field('Anxious')
+    
 
+    
     comments = models.StringField(
         label="If you have any comments on the experiment, you can leave them here:", blank=True)
     decision_info = models.IntegerField(
@@ -216,6 +280,8 @@ class Decision_info_eco(Page):
         player.effect_label = player.effect_label
         player.multiplier_eco = player.multiplier_eco
 
+
+
 class Decision_info_control(Page):
     form_model = 'player'
     form_fields = ['decision_info', 'effect_sustainable']
@@ -229,6 +295,18 @@ class Decision_info_control(Page):
     def before_next_page(player, timeout_happened):
         player.decision_info = player.decision_info
         player.effect_sustainable = player.effect_sustainable
+
+class OtherPlayer(Page):
+    form_model = 'player'
+    form_fields = ['talking', 'avoiding', 'donothing', 'angry', 'violation']
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.talking = player.talking
+        player.avoiding = player.avoiding
+        player.donothing = player.donothing
+        player.angry = player.angry
+        player.violation = player.violation
 
 class EmotionsPast(Page):
     form_model = 'player'
@@ -300,4 +378,4 @@ class Thankyou(Page):
     pass
 
 
-page_sequence = [EndGameControl, EndGameEco, Decision_info_eco, Decision_info_control, EmotionsPast, EmotionsDuring, Questionnaire, Demographics, Thankyou]
+page_sequence = [EndGameControl, EndGameEco, Decision_info_eco, Decision_info_control, OtherPlayer, EmotionsPast, EmotionsDuring, Questionnaire, Demographics, Thankyou]
