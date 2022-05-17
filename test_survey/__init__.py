@@ -106,6 +106,68 @@ class Player(BasePlayer):
         label="Physically confront the (violating) player",
         widget=widgets.RadioSelectHorizontal,
         )
+
+    headphones = models.IntegerField(
+       choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Make an angry remark to Guest A about the headphones (Call them out) ",
+        widget=widgets.RadioSelectHorizontal,
+        )
+    future = models.IntegerField(
+       choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Make a point of avoiding Guest A in the future, even when Guest A is not listening to music on headphones at a funeral ",
+        widget=widgets.RadioSelectHorizontal,
+        )
+    nothingguest = models.IntegerField(
+        choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Do nothing about Guest A",
+        widget=widgets.RadioSelectHorizontal,
+        )
+    talkguest = models.IntegerField(
+        choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label= "Talk to someone else about the behaviour of Guest A ",
+        widget=widgets.RadioSelectHorizontal,
+        )
+    aggression = models.IntegerField(
+        choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Use physically aggression to confront Guest A ",
+        widget=widgets.RadioSelectHorizontal,
+        )
+
     nationality = models.StringField(label="Please enter your nationality:")
     education = models.IntegerField(
         choices=[
@@ -321,6 +383,18 @@ class OtherPlayer(Page):
         player.angry = player.angry
         player.violation = player.violation
 
+class FuneralQuestion(Page):
+    form_model = 'player'
+    form_fields = ['headphones', 'future', 'nothingguest', 'talkguest', 'aggression']
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.headphones = player.headphones
+        player.future = player.future
+        player.nothingguest = player.nothingguest 
+        player.talkguest = player.talkguest
+        player.aggression = player.aggression
+
 class EmotionsPast(Page):
     form_model = 'player'
     form_fields = ['happy_past', 'excited_past', 'enthusiastic_past', 'proud_past', 'inspired_past', 'sad_past', 'afraid_past', 'angry_past', 'ashamed_past', 'anxious_past']
@@ -391,4 +465,4 @@ class Thankyou(Page):
     pass
 
 
-page_sequence = [EndGameControl, EndGameEco, Decision_info_eco, Decision_info_control, EmotionsPast, EmotionsDuring, OtherPlayer, Questionnaire, Demographics, Thankyou]
+page_sequence = [EndGameControl, EndGameEco, Decision_info_eco, Decision_info_control, EmotionsPast, EmotionsDuring, OtherPlayer, FuneralQuestion, Questionnaire, Demographics, Thankyou]
