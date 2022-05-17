@@ -225,7 +225,7 @@ def set_points_group_total(player):
 
 def set_profit(player):
     participant = player.participant
-    participant.profit_player_total = round(participant.points_player_total * 0.03, 2)
+    participant.profit_player_total = round(participant.points_player_total * 0.03, 3)
     return participant.profit_player_total
 
 def set_eco_labels_total(player): #number of eco-labels in the group, DOESNT WORK YET
