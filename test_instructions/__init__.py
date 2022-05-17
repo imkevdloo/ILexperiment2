@@ -63,7 +63,7 @@ class Player(BasePlayer):
           ],
         label="Q4: Imagine a group of 4 participants: 2 participants always cut down 20 trees each, 1 participant always cuts down 10 trees, and the last person always cuts down 15 trees. In which round does the forest die?",
         )
-    check_points = models.FloatField(label="Q5: You have removed, 15 trees in round 1, 20 trees in round 2, and 7 trees in round 3. How many points (not euros) would you have after round 3?")
+    check_points = models.FloatField(label="Q5: You have removed, 15 trees in round 1, 20 trees in round 2, and 7 trees in round 3. How many points (not pounds) would you have after round 3?")
     check_eco = models.IntegerField(
         choices=[
         [1, 'still have it'],

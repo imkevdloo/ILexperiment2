@@ -82,6 +82,18 @@ class Player(BasePlayer):
         label="Make an angry remark towards this player (Call them out)",
         widget=widgets.RadioSelectHorizontal,
         )
+    inappropriate = models.IntegerField(
+        choices=[
+        [1, 'Extremely inappropriate'],
+        [2, 'Very inappropriate'],
+        [3, 'Somewhat inappropriate'],
+        [4, 'Somewhat appropriate'],
+        [5, 'Very appropriate'],
+        [6, 'Extremely appropriate']
+        ],
+        label="Please select very inappropriate here",
+        widget=widgets.RadioSelectHorizontal,
+        )
     violation = models.IntegerField(
         choices=[
         [1, 'Extremely inappropriate'],
@@ -298,12 +310,13 @@ class Decision_info_control(Page):
 
 class OtherPlayer(Page):
     form_model = 'player'
-    form_fields = ['talking', 'avoiding', 'donothing', 'angry', 'violation']
+    form_fields = ['talking', 'avoiding', 'donothing', 'angry', 'violation', 'inappropriate']
 
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.talking = player.talking
         player.avoiding = player.avoiding
+        player.inappropriate = player.inappropriate 
         player.donothing = player.donothing
         player.angry = player.angry
         player.violation = player.violation
@@ -378,4 +391,4 @@ class Thankyou(Page):
     pass
 
 
-page_sequence = [EndGameControl, EndGameEco, Decision_info_eco, Decision_info_control, OtherPlayer, EmotionsPast, EmotionsDuring, Questionnaire, Demographics, Thankyou]
+page_sequence = [EndGameControl, EndGameEco, Decision_info_eco, Decision_info_control, EmotionsPast, EmotionsDuring, OtherPlayer, Questionnaire, Demographics, Thankyou]
