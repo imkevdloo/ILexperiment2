@@ -28,6 +28,8 @@ class Player(BasePlayer):
         choices=[
             [1, 'I consent, I would like to participate.']
         ], widget = widgets.RadioSelect)
+    prolificid = models.StringField(
+        label="ProlificID")
     treatment = models.StringField()
     bot_question = models.IntegerField(
         choices=[
@@ -103,6 +105,14 @@ class Welcome(Page):
     def before_next_page(player: Player, timeout_happened):
         participant = player.participant
         player.treatment = participant.treatment
+
+class ProlificID(Page):
+    form_model = 'player'
+    form_fields = ['prolificid']
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.prolificid = player.prolificid
 
 class ControlQuestion(Page):
     form_model = 'player'
@@ -367,4 +377,4 @@ class StartExperiment(Page):
     pass
 
 
-page_sequence = [Welcome, ControlQuestion, Exit, InstructionsSECO, InstructionsControl, ExampleScreen, ExampleControlGP, ExampleControlGT,ExampleControlIP, ExampleControlIT, ExampleEcoGP, ExampleEcoGT, ExampleEcoIP, ExampleEcoIT, MouselabExplanation, StartExperiment]
+page_sequence = [Welcome, ProlificID, ControlQuestion, Exit, InstructionsSECO, InstructionsControl, ExampleScreen, ExampleControlGP, ExampleControlGT,ExampleControlIP, ExampleControlIT, ExampleEcoGP, ExampleEcoGT, ExampleEcoIP, ExampleEcoIT, MouselabExplanation, StartExperiment]
