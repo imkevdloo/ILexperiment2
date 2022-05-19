@@ -13,7 +13,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     removal_decisions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-    treatments = ['SECO_I_T', 'SECO_I_P', 'SECO_G_T', 'SECO_G_P', 'Control_I_T', 'Control_I_P', 'Control_G_T', 'Control_G_P']
+    treatments = ['Control_G_T', 'SECO_I_T', 'SECO_G_T', 'Control_I_T', 'Control_I_P', 'Control_G_T', 'Control_G_P']
 
 class Subsession(BaseSubsession):
     pass
