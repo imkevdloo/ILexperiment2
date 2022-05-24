@@ -13,7 +13,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     removal_decisions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-    treatments = ['Control_G_P', 'Control_I_T', 'Control_G_T', 'Control_G_P']
+    treatments = ['SECO_I_T', 'SECO_I_P', 'Control_I_T', 'Control_I_P']
 
 class Subsession(BaseSubsession):
     pass
@@ -171,7 +171,7 @@ class InstructionsSECO(Page):
     def before_next_page(player, timeout_happened):
         player.trees_player_total = 0
         player.points_player_total = 0
-        player.eco_status = "Yes"
+        player.eco_status = "earned"
         player.eco_status_p2 = "Yes"  # participant or player?
         player.eco_status_p3 = "Yes"
         player.eco_status_p4 = "Yes"
@@ -217,7 +217,7 @@ class InstructionsControl(Page):
     def before_next_page(player, timeout_happened):
         player.trees_player_total = 0
         player.points_player_total = 0
-        player.eco_status = "Yes"
+        player.eco_status = "earned"
         player.eco_status_p2 = "Yes"  # participant or player?
         player.eco_status_p3 = "Yes"
         player.eco_status_p4 = "Yes"
@@ -377,4 +377,4 @@ class StartExperiment(Page):
     pass
 
 
-page_sequence = [Welcome, ProlificID, ControlQuestion, Exit, InstructionsSECO, InstructionsControl, ExampleScreen, ExampleControlGP, ExampleControlGT,ExampleControlIP, ExampleControlIT, ExampleEcoGP, ExampleEcoGT, ExampleEcoIP, ExampleEcoIT, MouselabExplanation, StartExperiment]
+page_sequence = [Welcome, ProlificID, ControlQuestion, Exit, InstructionsSECO, InstructionsControl, ExampleScreen, ExampleControlGP, ExampleControlGT,ExampleControlIP, ExampleControlIT, ExampleEcoGP, ExampleEcoGT, ExampleEcoIP, ExampleEcoIT, StartExperiment]

@@ -24,7 +24,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession): 
-    pass #change treatments here, or change the picture per participant.
+    pass 
 
 
 class Group(BaseGroup):
@@ -137,13 +137,13 @@ def set_forest(player):
 def set_eco_status(player):
     participant = player.participant
     if participant.treatment == 'SECO_I_T' or participant.treatment == 'SECO_I_P' or participant.treatment == 'SECO_G_T' or participant.treatment == 'SECO_G_P':
-        if participant.eco_status == "Yes":
+        if participant.eco_status == "earned":
             if participant.trees_player_round <= 10:
-                participant.eco_status = "Yes"
+                participant.eco_status = "earned"
             else:
-                participant.eco_status = "No"
+                participant.eco_status = "lost"
         else:
-            participant.eco_status = "No"
+            participant.eco_status = "lost"
     else:
         participant.eco_status = " "
     return participant.eco_status
@@ -231,13 +231,13 @@ def set_profit(player):
 def set_eco_labels_total(player): #number of eco-labels in the group, DOESNT WORK YET
     participant = player.participant
     if participant.treatment == 'SECO_I_T' or participant.treatment == 'SECO_I_P' or participant.treatment == 'SECO_G_T' or participant.treatment == 'SECO_G_P' :
-        if (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') :
+        if (participant.eco_status == 'earned' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') :
             participant.eco_labels_total = 4
-        elif (participant.eco_status == 'No' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No'):
+        elif (participant.eco_status == 'Lost' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'earned' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'earned' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'earned' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No'):
             participant.eco_labels_total = 3
-        elif (participant.eco_status == 'No' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No'):
+        elif (participant.eco_status == 'Lost' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'lost' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'lost' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'earned' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'earned' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'earned' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No'):
             participant.eco_labels_total = 2
-        elif (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes'):
+        elif (participant.eco_status == 'earned' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'lost' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'lost' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'lost' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes'):
             participant.eco_labels_total = 1
         else: 
             participant.eco_labels_total = 0
@@ -354,9 +354,7 @@ class DecisionControlIP(Page):
 
     @staticmethod
     def error_message(player, values):
-        if len(values['sButtonClick']) == 0:
-            return 'Please hover your mouse over at least one block to reveal information.'
-        elif values['trees_player_round'] not in Constants.removal_decisions:
+        if values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
             #removed error message and deleted mousetracking info on pages
 
@@ -400,9 +398,7 @@ class DecisionControlIT(Page):
 
     @staticmethod
     def error_message(player, values):
-        if len(values['sButtonClick']) == 0:
-            return 'Please hover your mouse over at least one block to reveal information.'
-        elif values['trees_player_round'] not in Constants.removal_decisions:
+        if values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
 
     @staticmethod
@@ -537,9 +533,7 @@ class DecisionEcoIP(Page):
 
     @staticmethod
     def error_message(player, values):
-        if len(values['sButtonClick']) == 0:
-            return 'Please hover your mouse over at least one block to reveal information.'
-        elif values['trees_player_round'] not in Constants.removal_decisions:
+        if values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
 
     @staticmethod
@@ -582,9 +576,7 @@ class DecisionEcoIT(Page):
 
     @staticmethod
     def error_message(player, values):
-        if len(values['sButtonClick']) == 0:
-            return 'Please hover your mouse over at least one block to reveal information.'
-        elif values['trees_player_round'] not in Constants.removal_decisions:
+        if values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
 
     @staticmethod
