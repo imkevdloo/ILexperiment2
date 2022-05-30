@@ -13,7 +13,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     removal_decisions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-    treatments = ['SECO_I_P', 'Control_I_T']
+    treatments = ['SECO_I_P', 'SECO_I_T', 'Control_I_P', 'Control_I_T']
 
 class Subsession(BaseSubsession):
     pass
@@ -233,6 +233,23 @@ class InstructionsControl(Page):
         participant.eco_status_p4 = player.eco_status_p4
         participant.eco_labels_total = 4 #or 0?
 
+class DecisionEcoIT(Page):
+    form_model = 'player'
+    form_fields = ['sButtonClick', 'sTimeClick'] 
+
+ 
+    @staticmethod
+    def error_message(player, values):
+        if len(values['sButtonClick']) == 0:
+            return 'Please hover your mouse over at least one block to reveal information.'
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        participant = player.participant
+        participant.sButtonClick = player.sButtonClick
+        participant.sTimeClick = player.sTimeClick
+      
+
 class ExampleScreen(Page):
     pass
 
@@ -377,4 +394,4 @@ class StartExperiment(Page):
     pass
 
 
-page_sequence = [Welcome, ProlificID, ControlQuestion, Exit, InstructionsSECO, InstructionsControl, ExampleScreen, ExampleControlGP, ExampleControlGT,ExampleControlIP, ExampleControlIT, ExampleEcoGP, ExampleEcoGT, ExampleEcoIP, ExampleEcoIT, StartExperiment]
+page_sequence = [Welcome, ProlificID, ControlQuestion, Exit, InstructionsSECO, InstructionsControl, ExampleScreen, ExampleControlGP, ExampleControlGT,ExampleControlIP, ExampleControlIT, ExampleEcoGP, ExampleEcoGT, ExampleEcoIP, ExampleEcoIT, MouselabExplanation, StartExperiment]

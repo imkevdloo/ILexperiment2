@@ -228,7 +228,7 @@ def set_profit(player):
     participant.profit_player_total = round(participant.points_player_total * 0.03, 3)
     return participant.profit_player_total
 
-def set_eco_labels_total(player): #number of eco-labels in the group, DOESNT WORK YET
+def set_eco_labels_total(player): 
     participant = player.participant
     if participant.treatment == 'SECO_I_T' or participant.treatment == 'SECO_I_P' or participant.treatment == 'SECO_G_T' or participant.treatment == 'SECO_G_P' :
         if (participant.eco_status == 'earned' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') :
@@ -245,9 +245,7 @@ def set_eco_labels_total(player): #number of eco-labels in the group, DOESNT WOR
         participant.eco_labels_total = " "  #fill out "No" here?
     return participant.eco_labels_total  #when to use participant and when player 
 
-#def creating_sessions(subsession):
- #   if subsession.round_number == 1 
-  #  for player in subsession.get_
+
 
 # PAGES 
 
@@ -267,7 +265,7 @@ class DecisionControlGP(Page):
             return 'Please hover your mouse over at least one block to reveal information.'
         elif values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
-            #I removed an error message here, and I removed the eyetracking script in the pages
+            
 
     @staticmethod
     def before_next_page(player, timeout_happened):
@@ -354,9 +352,10 @@ class DecisionControlIP(Page):
 
     @staticmethod
     def error_message(player, values):
-        if values['trees_player_round'] not in Constants.removal_decisions:
+        if len(values['sButtonClick']) == 0:
+            return 'Please hover your mouse over at least one block to reveal information.'
+        elif values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
-            #removed error message and deleted mousetracking info on pages
 
     @staticmethod
     def before_next_page(player, timeout_happened):
@@ -398,7 +397,9 @@ class DecisionControlIT(Page):
 
     @staticmethod
     def error_message(player, values):
-        if values['trees_player_round'] not in Constants.removal_decisions:
+        if len(values['sButtonClick']) == 0:
+            return 'Please hover your mouse over at least one block to reveal information.'
+        elif values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
 
     @staticmethod
@@ -533,7 +534,9 @@ class DecisionEcoIP(Page):
 
     @staticmethod
     def error_message(player, values):
-        if values['trees_player_round'] not in Constants.removal_decisions:
+        if len(values['sButtonClick']) == 0:
+            return 'Please hover your mouse over at least one block to reveal information.'
+        elif values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
 
     @staticmethod
@@ -576,7 +579,9 @@ class DecisionEcoIT(Page):
 
     @staticmethod
     def error_message(player, values):
-        if values['trees_player_round'] not in Constants.removal_decisions:
+        if len(values['sButtonClick']) == 0:
+            return 'Please hover your mouse over at least one block to reveal information.'
+        elif values['trees_player_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
 
     @staticmethod

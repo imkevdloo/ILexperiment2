@@ -1,0 +1,44 @@
+
+{{ block title }}
+Practical information
+{{ endblock }}
+
+{{ block content }}
+
+<p>
+    <br><br>
+    The decision screen in part 1 looks similair to the decision screen that you have just seen. 
+    <br><br>  
+    The only difference is that in part 1 the numbers will be covered with a block. In order to see the number underneath the block, you need to hover over the block with your mouse. 
+    <br><br>
+    You can only submit an answer if you have hovered over at least one of the blocks. 
+    <br><br>
+    Here follows an example.  
+    <br> <br>
+    Please hover over the block in order to reveal the random number. 
+    <br>
+    Random number: <button type="button" class="r1 mousy button-outcome hidden" id="example"> 4 </button> 
+    <br><br>
+</p>
+
+{{ next_button }}
+{{ endblock }}
+
+{{ block scripts }}
+<script>
+    
+    document.addEventListener("DOMContentLoaded", function(debug=true) {
+    InitializeVT(document.getElementsByClassName('otree-body')[0]);
+    // Convert all buttons with the class 'clickable' into click VT buttons
+    ConvertButtons2VT('clickable',sActivation='click');
+    // Convert all buttons with the class 'mousy' into mouseover VT buttons
+    ConvertButtons2VT('mousy',sActivation='mouseover');
+    // Convert all buttons with the class 'row' into click VT buttons that activate outcome-buttons with the class 'r1'
+    ConvertButtons2VT('row',sActivation='click', 'r1');
+});
+</script>
+
+<link href="{% static 'global/VT_functionality.css' %}" rel="stylesheet">
+<script src="{% static 'global/VT_functionality2.js' %}"></script>
+
+{{ endblock }}
